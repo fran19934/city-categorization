@@ -53,3 +53,37 @@ pypi_test:
 
 pypi:
 	@twine upload dist/* -u $(PYPI_USERNAME)
+
+
+#################### PACKAGE ACTIONS ###################
+
+reinstall_package:
+	@pip uninstall -y city-categorization || :
+	@pip install -e .
+
+run_image_load:
+	python -c 'from city_categorization.main import image_load; image_load()'
+
+run_make_array:
+	python -c 'from city_categorization.main import make_array; make_array()'
+
+run_model_load:
+	python -c 'from city_categorization.main import model_load; model_load()'
+
+run_preprocess:
+	python -c 'from city_categorization.main import preprocess; preprocess()'
+
+run_predict:
+	python -c 'from city_categorization.main import predict; predict()'
+
+run_y_cat_make:
+	python -c 'from city_categorization.main import y_cat_make; y_cat_make()'
+
+run_prediction_df:
+	python -c 'from city_categorization.main import prediction_df; prediction_df()'
+
+run_rgb_image:
+	python -c 'from city_categorization.main import rgb_image; rgb_image()'
+
+run_final_outputs:
+	python -c 'from city_categorization.main import final_outputs; final_outputs()'
