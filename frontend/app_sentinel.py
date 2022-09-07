@@ -97,7 +97,7 @@ def get_satellite_image(city):
     columns[0].write('Working to find the best image...')
     columns[0].write('🔎 🌍')
 
-    cloud_coverage = 2
+    cloud_coverage = 0
     size = 0
     while size < 100:
         json_request = {
@@ -154,7 +154,7 @@ def get_satellite_image(city):
 
 st.markdown("""# City Categorization
 ## A pilot project to assist territorial planning actions 🗺
-###### made with 😀 by **Francisco Garcia**, **Pedro Chaves** and **Rodrigo Pinto** in 🇵🇹""")
+###### made with 😀 by **Francisco Garcia**, **Pedro Chaves** and **Rodrigo Pinto** in 🇵🇹 ❤️""")
 
 #Columns
 columns = st.columns(2)
@@ -172,6 +172,42 @@ if columns[0].button('Click me to find the city satellite image'):
     image = Image.open(f'{city}.tiff')
     columns[1].image(image, caption=city.capitalize())
 
+
+st.markdown("""# Folium Map
+            """)
+
+
+
+# FOLIUM MAP
+
+
+def get_lat_lon():
+    api_url = f'https://api.api-ninjas.com/v1/city?name={"Cape Town"}'
+    response = requests.get(api_url, headers={'X-Api-Key': X_API_KEY})
+    return response.json()[0]['latitude'],response.json()[0]['longitude']
+
+
+from streamlit_folium import folium_static
+import folium
+import os
+import pandas as pd
+
+lat_lon = get_lat_lon()
+
+m = folium.Map(location=[lat_lon[0], lat_lon[1]], zoom_start=12)
+
+folium_static(m)
+
+st.write('# Full width map')
+
+# not possible to demo this without setting the full site in wide mode
+
+st.code("""""")
+
+
+
+
+
 ############################################
 ## Access the model e get processed image ##
 ############################################
@@ -181,4 +217,4 @@ if columns[0].button('Click me to find the city satellite image'):
 # fill those informations before run
 #CLIENT_ID = "<YOUR CLIENT ID FROM SENTINEL HUB>"
 #CLIENT_SECRET = "<YOUR CLIENT SECRET FROM SENTINEL HUB>"
-#X_API_KEY = "<YOUR API KEY FROM API-NINJAS>"
+#X_API_KEY = "<YOUR API KEY FROM API-NINJAS>")
